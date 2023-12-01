@@ -25,25 +25,31 @@ int main() {
 
   int direction{10};
 
+  int collision_with_axe{true};
+
   SetTargetFPS(60);
   while (WindowShouldClose() == false) {
     BeginDrawing();
     ClearBackground(WHITE);
 
-    DrawCircle(circle_x, circle_y, circle_radius, BLUE);
-    DrawRectangle(axe_x, axe_y, axe_length, axe_length, RED);
+    if (collision_with_axe) {
+      DrawText("Game Over!", 400, 200, 20, RED);
+    } else {
+      DrawCircle(circle_x, circle_y, circle_radius, BLUE);
+      DrawRectangle(axe_x, axe_y, axe_length, axe_length, RED);
 
-    axe_y += direction;
-    if (axe_y > height || axe_y < 0) {
-      direction = -direction;
-    }
+      axe_y += direction;
+      if (axe_y > height || axe_y < 0) {
+        direction = -direction;
+      }
 
-    if (IsKeyDown(KEY_D) && circle_x < width) {
-      circle_x += 10;
-    }
+      if (IsKeyDown(KEY_D) && circle_x < width) {
+        circle_x += 10;
+      }
 
-    if (IsKeyDown(KEY_A) && circle_x > 0) {
-      circle_x -= 10;
+      if (IsKeyDown(KEY_A) && circle_x > 0) {
+        circle_x -= 10;
+      }
     }
 
     EndDrawing();
